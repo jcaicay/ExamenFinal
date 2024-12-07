@@ -45,11 +45,14 @@ def get_one_post(post_id: int):
 @app.route("/alumno/create", methods=["POST"])
 def create_one_post():
     data = request.json
-    title = data.get('title')
-    content = data.get('content')
+    nombre = data.get('nombre')
+    apellido = data.get('apellido')
+    aprobado = data.get('aprobado')
+    nota = data.get('nota')
+    fecha= data.get('fecha')
     
     conn = get_db_connection()
-    conn.execute('INSERT INTO alumnos (title, content) VALUES (?, ?)', (title, content))
+    conn.execute('INSERT INTO alumnos (nombre, apellido, aprobado, nota, fecha) VALUES (?, ?, ?, ?, ?)', (nombre, apellido, aprobado, nota, fecha))
     conn.commit()
     conn.close()
     return jsonify({"message": "Alumno created"})
@@ -58,11 +61,14 @@ def create_one_post():
 @app.route("/alumno/edit/<int:post_id>", methods=["PUT"])
 def edit_one_post(post_id):
     data = request.json
-    title = data.get('title')
-    content = data.get('content')
+    nombre = data.get('nombre')
+    apellido = data.get('apellido')
+    aprobado = data.get('aprobado')
+    nota = data.get('nota')
+    fecha= data.get('fecha')
 
     conn = get_db_connection()
-    conn.execute('UPDATE alumnos SET title = ?, content = ? WHERE id = ?', (title, content, post_id))
+    conn.execute('UPDATE alumnos SET nombre = ?, apellido = ?, aprobado = ?, nota = ?, fecha = ?  WHERE id = ?', (nombre, apellido, aprobado, nota, fecha, post_id))
     conn.commit()
     conn.close()
 
